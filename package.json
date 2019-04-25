@@ -1,0 +1,24 @@
+{
+  "name": "calculator-html",
+  "version": "1.0.0",
+  "description": "Calculator in HTML/CSS/Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beinnor/calculator-html-js.git"
+  },
+  "author": "Beinnor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beinnor/calculator-html-js/issues"
+  },
+  "homepage": "https://github.com/beinnor/calculator-html-js#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
+  }
+}
