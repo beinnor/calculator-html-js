@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
   <title>Calculator</title>
 </head>
 
@@ -14,25 +15,31 @@
 
   <div class="grid-container">
     <div class="screen" id="screen">0</div>
-    <div class="button number seven" id="seven">7</div>
-    <div class="button number eight" id="eight">8</div>
-    <div class="button number nine" id="nine">9</div>
-    <div class="button number four" id="four">4</div>
-    <div class="button number five" id="five">5</div>
-    <div class="button number six" id="six">6</div>
-    <div class="button number one" id="one">1</div>
-    <div class="button number two" id="two">2</div>
-    <div class="button number three" id="three">3</div>
-    <div class="button number zero" id="zero">0</div>
-    <div class="button decimal" id="decimal">.</div>
-    <div class="button plusminus" id="plusminus">&plusmn;</div>
-    <div class="button clear" id="clear">C</div>
-    <div class="button allClear" id="allClear">AC</div>
-    <div class="button operator altColor plus" id="plus">+</div>
-    <div class="button operator altColor minus" id="minus">-</div>
-    <div class="button operator altColor multiply" id="multiply">&times;</div>
-    <div class="button operator altColor divide" id="divide">&divide;</div>
-    <div class="button equal" id="equal">=</div>
+
+    <div class="seven"><button class="number" type="button">7</button></div>
+    <div class="eight"><button class="number" type="button">8</button></div>
+    <div class="nine"><button class="number" type="button">9</button></div>
+    <div class="four"><button class="number" type="button">4</button></div>
+    <div class="five"><button class="number" type="button">5</button></div>
+    <div class="six"><button class="number" type="button">6</button></div>
+    <div class="one"><button class="number" type="button">1</button></div>
+    <div class="two"><button class="number" type="button">2</button></div>
+    <div class="three"><button class="number" type="button">3</button></div>
+    <div class="zero"><button class="number" type="button">0</button></div>
+
+    <div class="decimal"><button id="decimal" type="button">.</button></div>
+    <div class="plusminus"><button id="plusminus" type="button">&PlusMinus;</button></div>
+
+    <div class="clear"><button id="clear" type="button">C</button></div>
+    <div class="allClear"><button id="allClear" type="button">AC</button></div>
+
+    <div class="plus"><button class="operator" id="plus" type="button">+</button></div>
+    <div class="minus"><button class="operator" id="minus" type="button">-</button></div>
+    <div class="multiply"><button class="operator" id="multiply" type="button">&times;</button>
+    </div>
+    <div class="divide"><button class="operator" id="divide" type="button">&divide;</button>
+    </div>
+    <div class="equal"><button id="equal" type="button">=</button></div>
   </div>
 
   <script src="./js/script.js"></script>

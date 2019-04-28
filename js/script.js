@@ -71,6 +71,23 @@ const plusListener = (event) => {
   calc.clearScreen = true;
 };
 
+const minusListener = (event) => {
+  calc.operator = event.target.innerText;
+
+  const screenNum = parseInt(screen.innerText, 10);
+
+  if (calc.memory === null) {
+    calc.memory = screenNum;
+  } else {
+    // sum memory plus screen into screen
+    const sum = calc.memory - screenNum;
+    console.log(sum);
+    calc.memory = sum;
+    screen.innerText = sum;
+  }
+  calc.clearScreen = true;
+};
+
 const equalListener = () => {
   const screenNum = parseInt(screen.innerText, 10);
 
@@ -88,6 +105,9 @@ for (let i = 0; i < numberBtns.length; i += 1) {
 
 // Add eventlistener to plusBtn
 plusBtn.addEventListener('click', plusListener);
+
+// Add eventlistener to minusBtn
+minusBtn.addEventListener('click', minusListener);
 
 // Add eventlistener to equalBtn
 equalBtn.addEventListener('click', equalListener);
