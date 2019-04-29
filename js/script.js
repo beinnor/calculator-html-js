@@ -28,17 +28,92 @@ const calc = {
   clearScreen: false,
 };
 
-const clearAllListener = () => {
+// Helpers
+const maxNumValidator = (num) => {
+  if (num > 99999999 || num < -99999999) {
+    return false;
+  }
+  return true;
+};
+
+const clearMem = () => {
+  calc.memory = null;
+  calc.operator = null;
+};
+
+const updateScreen = (value) => {
+  let valNumber = null;
+  if (typeof value === 'number') {
+    valNumber = value;
+  } else if (typeof value === 'string') {
+    valNumber = parseFloat(value);
+  }
+
+  if (maxNumValidator(valNumber)) {
+    screen.innerText = parseFloat(valNumber);
+  } else {
+    screen.innerText = 'ERR';
+    clearMem();
+  }
+};
+
+const updateMemory = (value) => {
+  let valNumber = null;
+  if (typeof value === 'number') {
+    valNumber = value;
+  } else if (typeof value === 'string') {
+    valNumber = parseFloat(value);
+  }
+
+  if (maxNumValidator(valNumber)) {
+    calc.memory = valNumber;
+  } else {
+    screen.innerText = 'ERR';
+    clearMem();
+  }
+};
+
+const calculate = (event) => {
+  const operator = event.target.innerText;
+  calc.operator = operator;
+  const screenNum = parseFloat(screen.innerText);
+
+  if (calc.memory === null) {
+    updateMemory(screenNum);
+  } else {
+    let sum;
+    switch (operator) {
+      case '+':
+        sum = calc.memory + screenNum;
+        break;
+      case '-':
+        sum = calc.memory - screenNum;
+        break;
+      case '\xF7':
+        sum = calc.memory / screenNum;
+        break;
+      case '\xD7':
+        sum = calc.memory * screenNum;
+        break;
+      default:
+        throw new Error('Error in calculate function!');
+    }
+
+    updateMemory(sum);
+    updateScreen(sum);
+  }
+  calc.clearScreen = true;
+};
+
+// EventListeners
+const allClearListener = () => {
   screen.innerText = '0';
   calc.memory = null;
   calc.operator = null;
 };
 
-const clearScreenListener = () => {
-  screen.innerText = '0';
-};
-
-const clearMem = () => {
+const clearListener = () => {
+  screen.innerText = calc.memory;
   calc.memory = null;
   calc.operator = null;
 };
@@ -58,98 +133,29 @@ const numberListener = (event) => {
   }
 };
 
-const plusListener = (event) => {
-  calc.operator = event.target.innerText;
-
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.memory === null) {
-    calc.memory = screenNum;
-  } else {
-    // sum memory plus screen into screen
-    const sum = calc.memory + screenNum;
-    console.log(sum);
-    calc.memory = sum;
-    screen.innerText = sum;
-  }
-  calc.clearScreen = true;
-};
-
-const minusListener = (event) => {
-  calc.operator = event.target.innerText;
-
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.memory === null) {
-    calc.memory = screenNum;
-  } else {
-    // sum memory minus screen into screen
-    const sum = calc.memory - screenNum;
-    console.log(sum);
-    calc.memory = sum;
-    screen.innerText = sum;
-  }
-  calc.clearScreen = true;
-};
-
-const multiplyListener = (event) => {
-  calc.operator = event.target.innerText;
-
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.memory === null) {
-    calc.memory = screenNum;
-  } else {
-    // sum memory times screen into screen
-    const sum = calc.memory * screenNum;
-    console.log(sum);
-    calc.memory = sum;
-    screen.innerText = sum;
-  }
-  calc.clearScreen = true;
-};
-
-const divideListener = (event) => {
-  calc.operator = event.target.innerText;
-
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.memory === null) {
-    calc.memory = screenNum;
-  } else {
-    // sum memory times screen into screen
-    const sum = calc.memory / screenNum;
-    console.log(sum);
-    calc.memory = sum;
-    screen.innerText = sum;
-  }
-  calc.clearScreen = true;
-};
-
-
 const equalListener = () => {
   const screenNum = parseFloat(screen.innerText);
 
   if (calc.operator === '+') {
-    screen.innerText = calc.memory + screenNum;
+    updateScreen(calc.memory + screenNum);
     calc.clearScreen = true;
     clearMem();
   }
 
   if (calc.operator === '-') {
-    screen.innerText = calc.memory - screenNum;
+    updateScreen(calc.memory - screenNum);
     calc.clearScreen = true;
     clearMem();
   }
 
   if (calc.operator === '\xD7') {
-    screen.innerText = calc.memory * screenNum;
+    updateScreen(calc.memory * screenNum);
     calc.clearScreen = true;
     clearMem();
   }
 
   if (calc.operator === '\xF7') {
-    screen.innerText = calc.memory / screenNum;
+    updateScreen(calc.memory / screenNum);
     calc.clearScreen = true;
     clearMem();
   }
@@ -175,16 +181,16 @@ const plusMinusListener = () => {
   }
 };
 
-// EventListeners
+// Add EventListeners
 for (let i = 0; i < numberBtns.length; i += 1) {
   numberBtns[i].addEventListener('click', numberListener);
 }
-plusBtn.addEventListener('click', plusListener);
-minusBtn.addEventListener('click', minusListener);
-multiplyBtn.addEventListener('click', multiplyListener);
-divideBtn.addEventListener('click', divideListener);
+plusBtn.addEventListener('click', calculate);
+minusBtn.addEventListener('click', calculate);
+multiplyBtn.addEventListener('click', calculate);
+divideBtn.addEventListener('click', calculate);
 equalBtn.addEventListener('click', equalListener);
 plusMinusBtn.addEventListener('click', plusMinusListener);
-clearBtn.addEventListener('click', clearScreenListener);
-allClearBtn.addEventListener('click', clearAllListener);
+clearBtn.addEventListener('click', clearListener);
+allClearBtn.addEventListener('click', allClearListener);
 decimalBtn.addEventListener('click', decimalBtnListener);

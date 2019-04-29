@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>User Stories</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <h1 id="user-stories">User Stories</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can see a display showing the current number entered or the
+result of the last operation.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can see an entry pad containing buttons for the digits 0-9,
+operations - '+', '-', '/', and '=', a 'C' button (for clear), and an 'AC'
+button (for clear all).</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can enter numbers as sequences up to 8 digits long by clicking on
+digits in the entry pad. Entry of any digits more than 8 will be ignored.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can click on an operation button to display the result of that
+operation on:
+<ul>
+<li>the result of the preceeding operation and the last number entered OR</li>
+<li>the last two numbers entered OR</li>
+<li>the last number entered</li>
+</ul>
+</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can click the 'C' button to clear the last number or the last
+operation. If the users last entry was an operation the display will be
+updated to the value that preceded it.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> User can click the 'AC' button to clear all internal work areas and
+to set the display to 0.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> User can see 'ERR' displayed if any operation would exceed the
+8 digit maximum.</li>
+</ul>
+<h2 id="bonus-features">Bonus features</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> User can click a '+/-' button to change the sign of the number that is
+currently displayed.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> User can see a decimal point ('.') button on the entry pad to that
+allows floating point numbers up to 3 places to be entered and operations to
+be carried out to the maximum number of decimal places entered for any one
+number.</li>
+</ul>
+<h2 id="constraints">Constraints</h2>
+<ul>
+<li>You may not use the <code>eval()</code> function to execute calculations</li>
+</ul>
+
+    </body>
+    </html>
