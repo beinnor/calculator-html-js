@@ -79,7 +79,7 @@ const minusListener = (event) => {
   if (calc.memory === null) {
     calc.memory = screenNum;
   } else {
-    // sum memory plus screen into screen
+    // sum memory minus screen into screen
     const sum = calc.memory - screenNum;
     console.log(sum);
     calc.memory = sum;
@@ -88,11 +88,64 @@ const minusListener = (event) => {
   calc.clearScreen = true;
 };
 
+const multiplyListener = (event) => {
+  calc.operator = event.target.innerText;
+
+  const screenNum = parseInt(screen.innerText, 10);
+
+  if (calc.memory === null) {
+    calc.memory = screenNum;
+  } else {
+    // sum memory times screen into screen
+    const sum = calc.memory * screenNum;
+    console.log(sum);
+    calc.memory = sum;
+    screen.innerText = sum;
+  }
+  calc.clearScreen = true;
+};
+
+const divideListener = (event) => {
+  calc.operator = event.target.innerText;
+
+  const screenNum = parseInt(screen.innerText, 10);
+
+  if (calc.memory === null) {
+    calc.memory = screenNum;
+  } else {
+    // sum memory times screen into screen
+    const sum = calc.memory / screenNum;
+    console.log(sum);
+    calc.memory = sum;
+    screen.innerText = sum;
+  }
+  calc.clearScreen = true;
+};
+
+
 const equalListener = () => {
   const screenNum = parseInt(screen.innerText, 10);
 
   if (calc.operator === '+') {
     screen.innerText = calc.memory + screenNum;
+    calc.clearScreen = true;
+    clearMem();
+  }
+
+  if (calc.operator === '-') {
+    screen.innerText = calc.memory - screenNum;
+    calc.clearScreen = true;
+    clearMem();
+  }
+
+  if (calc.operator === '\xD7') {
+    screen.innerText = calc.memory * screenNum;
+    calc.clearScreen = true;
+    clearMem();
+  }
+
+  if (calc.operator === '\xF7') {
+    screen.innerText = calc.memory / screenNum;
     calc.clearScreen = true;
     clearMem();
   }
@@ -108,6 +161,12 @@ plusBtn.addEventListener('click', plusListener);
 
 // Add eventlistener to minusBtn
 minusBtn.addEventListener('click', minusListener);
+
+// Add eventlistener to multiplyBtn
+multiplyBtn.addEventListener('click', multiplyListener);
+
+// Add eventlistener to divideBtn
+divideBtn.addEventListener('click', divideListener);
 
 // Add eventlistener to equalBtn
 equalBtn.addEventListener('click', equalListener);

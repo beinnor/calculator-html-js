@@ -1,50 +1,14 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* Reset buttons */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  /* show a hand cursor on hover; some argue that we
+  should keep the default arrow cursor for buttons */
+  cursor: pointer;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
@@ -53,7 +17,7 @@ table {
   --bg-color: #eeeeee;
   --screen-color: #dddddd;
   --border-color: #000000;
-  --btn-color:  #5f6266;
+  --btn-color:  #686b6e;
   --btn-alt-color: #d62d0f;
   --btn-hover-color: #262729;
   --font-color: #000000;
@@ -90,7 +54,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-bottom: 1px solid var(--border-color);
+  border: 1px solid var(--border-color);
   color: var(--font-color);
   font-size: 3rem;
   padding: 0 1rem 0 1rem;
@@ -141,6 +105,7 @@ button {
   font-size: 2rem;
   width: 100%;
   height: 100%;
+  border: 1px solid var(--border-color);
 }
 
 .operator {
