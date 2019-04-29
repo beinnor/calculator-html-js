@@ -14,13 +14,13 @@ const equalBtn = document.getElementById('equal');
 const allClearBtn = document.getElementById('allClear');
 const clearBtn = document.getElementById('clear');
 
+// Misc buttons
+const plusMinusBtn = document.getElementById('plusminus');
+const decimalBtn = document.getElementById('decimal');
+
 // Screen
 const screen = document.getElementById('screen');
 screen.innerText = '0';
-
-// TODO
-// const decimalBtn = document.getElementById('decimal');
-// const plusminusBtn = document.getElementById('plusminus');
 
 const calc = {
   memory: null,
@@ -28,10 +28,14 @@ const calc = {
   clearScreen: false,
 };
 
-const clearAll = () => {
+const clearAllListener = () => {
   screen.innerText = '0';
   calc.memory = null;
   calc.operator = null;
+};
+
+const clearScreenListener = () => {
+  screen.innerText = '0';
 };
 
 const clearMem = () => {
@@ -57,7 +61,7 @@ const numberListener = (event) => {
 const plusListener = (event) => {
   calc.operator = event.target.innerText;
 
-  const screenNum = parseInt(screen.innerText, 10);
+  const screenNum = parseFloat(screen.innerText);
 
   if (calc.memory === null) {
     calc.memory = screenNum;
@@ -74,7 +78,7 @@ const plusListener = (event) => {
 const minusListener = (event) => {
   calc.operator = event.target.innerText;
 
-  const screenNum = parseInt(screen.innerText, 10);
+  const screenNum = parseFloat(screen.innerText);
 
   if (calc.memory === null) {
     calc.memory = screenNum;
@@ -91,7 +95,7 @@ const minusListener = (event) => {
 const multiplyListener = (event) => {
   calc.operator = event.target.innerText;
 
-  const screenNum = parseInt(screen.innerText, 10);
+  const screenNum = parseFloat(screen.innerText);
 
   if (calc.memory === null) {
     calc.memory = screenNum;
@@ -108,7 +112,7 @@ const multiplyListener = (event) => {
 const divideListener = (event) => {
   calc.operator = event.target.innerText;
 
-  const screenNum = parseInt(screen.innerText, 10);
+  const screenNum = parseFloat(screen.innerText);
 
   if (calc.memory === null) {
     calc.memory = screenNum;
@@ -124,7 +128,7 @@ const divideListener = (event) => {
 
 
 const equalListener = () => {
-  const screenNum = parseInt(screen.innerText, 10);
+  const screenNum = parseFloat(screen.innerText);
 
   if (calc.operator === '+') {
     screen.innerText = calc.memory + screenNum;
@@ -151,31 +155,36 @@ const equalListener = () => {
   }
 };
 
-// Add eventlistener to numbers
+const decimalBtnListener = () => {
+  if (calc.clearScreen) {
+    screen.innerText = '0';
+    calc.clearScreen = false;
+  }
+
+  if (screen.innerText.length <= 7) {
+    screen.innerText += '.';
+  }
+};
+
+const plusMinusListener = () => {
+  const screenString = screen.innerText;
+  if (screenString[0] === '-' && screenString !== '0') {
+    screen.innerText = screenString.slice(1);
+  } else if (screenString !== '0') {
+    screen.innerText = `-${screenString}`;
+  }
+};
+
+// EventListeners
 for (let i = 0; i < numberBtns.length; i += 1) {
   numberBtns[i].addEventListener('click', numberListener);
 }
-
-// Add eventlistener to plusBtn
 plusBtn.addEventListener('click', plusListener);
-
-// Add eventlistener to minusBtn
 minusBtn.addEventListener('click', minusListener);
-
-// Add eventlistener to multiplyBtn
 multiplyBtn.addEventListener('click', multiplyListener);
-
-// Add eventlistener to divideBtn
 divideBtn.addEventListener('click', divideListener);
-
-// Add eventlistener to equalBtn
 equalBtn.addEventListener('click', equalListener);
-
-// Clear only last number entered
-clearBtn.addEventListener('click', () => {
-  screen.innerText = screen.innerText.slice(0, -1);
-  if (screen.innerText === '') screen.innerText = '0';
-});
-
-// Clear everything
-allClearBtn.addEventListener('click', clearAll);
+plusMinusBtn.addEventListener('click', plusMinusListener);
+clearBtn.addEventListener('click', clearScreenListener);
+allClearBtn.addEventListener('click', clearAllListener);
+decimalBtn.addEventListener('click', decimalBtnListener);
