@@ -8,39 +8,52 @@
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-  <title>Calculator</title>
+  <title>Calculator HTML5 & Javascript</title>
 </head>
 
 <body>
+  <header>
+    <h1>Calculator HTML5 & Javascript</h1>
+    <p>HTML5 and pure javascript. No libraries.</p>
+  </header>
+  <main>
 
-  <div class="grid-container">
-    <div class="screen" id="screen">0</div>
+    <div class="grid-container">
+      <div class="screen" id="screen">0</div>
 
-    <div class="seven"><button class="number" type="button">7</button></div>
-    <div class="eight"><button class="number" type="button">8</button></div>
-    <div class="nine"><button class="number" type="button">9</button></div>
-    <div class="four"><button class="number" type="button">4</button></div>
-    <div class="five"><button class="number" type="button">5</button></div>
-    <div class="six"><button class="number" type="button">6</button></div>
-    <div class="one"><button class="number" type="button">1</button></div>
-    <div class="two"><button class="number" type="button">2</button></div>
-    <div class="three"><button class="number" type="button">3</button></div>
-    <div class="zero"><button class="number" type="button">0</button></div>
+      <div class="seven"><button class="number" type="button">7</button></div>
+      <div class="eight"><button class="number" type="button">8</button></div>
+      <div class="nine"><button class="number" type="button">9</button></div>
+      <div class="four"><button class="number" type="button">4</button></div>
+      <div class="five"><button class="number" type="button">5</button></div>
+      <div class="six"><button class="number" type="button">6</button></div>
+      <div class="one"><button class="number" type="button">1</button></div>
+      <div class="two"><button class="number" type="button">2</button></div>
+      <div class="three"><button class="number" type="button">3</button></div>
+      <div class="zero"><button class="number" type="button">0</button></div>
 
-    <div class="decimal"><button id="decimal" type="button">.</button></div>
-    <div class="plusminus"><button id="plusminus" type="button">&PlusMinus;</button></div>
+      <div class="decimal"><button id="decimal" type="button">.</button></div>
+      <div class="plusminus"><button id="plusminus" type="button">&PlusMinus;</button></div>
 
-    <div class="clear"><button id="clear" type="button">C</button></div>
-    <div class="allClear"><button id="allClear" type="button">AC</button></div>
+      <div class="clear"><button id="clear" type="button">C</button></div>
+      <div class="allClear"><button id="allClear" type="button">AC</button></div>
 
-    <div class="plus"><button class="operator" id="plus" type="button">+</button></div>
-    <div class="minus"><button class="operator" id="minus" type="button">-</button></div>
-    <div class="multiply"><button class="operator" id="multiply" type="button">&times;</button>
+      <div class="plus"><button class="operator" id="plus" type="button">+</button></div>
+      <div class="minus"><button class="operator" id="minus" type="button">-</button></div>
+      <div class="multiply"><button class="operator" id="multiply" type="button">&times;</button>
+      </div>
+      <div class="divide"><button class="operator" id="divide" type="button">&divide;</button>
+      </div>
+      <div class="equal"><button id="equal" type="button">=</button></div>
     </div>
-    <div class="divide"><button class="operator" id="divide" type="button">&divide;</button>
-    </div>
-    <div class="equal"><button id="equal" type="button">=</button></div>
-  </div>
+  </main>
+
+  <footer>
+    <p>by
+      <a href="http://beinnor.github.io/">Beinnor</a> 2019
+    </p>
+
+  </footer>
 
   <script src="./js/script.js"></script>
 

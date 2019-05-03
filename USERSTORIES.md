@@ -17,17 +17,16 @@ operation. If the users last entry was an operation the display will be
 updated to the value that preceded it.
 -   [X] User can click the 'AC' button to clear all internal work areas and
 to set the display to 0.
--   [ ] User can see 'ERR' displayed if any operation would exceed the 
+-   [X] User can see 'ERR' displayed if any operation would exceed the 
 8 digit maximum.
 
 ## Bonus features
 
 -   [X] User can click a '+/-' button to change the sign of the number that is
 currently displayed.
--   [ ] User can see a decimal point ('.') button on the entry pad to that 
+-   [X] User can see a decimal point ('.') button on the entry pad to that 
 allows floating point numbers up to 3 places to be entered and operations to
-be carried out to the maximum number of decimal places entered for any one
-number.
+be carried out to the maximum number of decimal places available on screen.
 
 ## Constraints
 

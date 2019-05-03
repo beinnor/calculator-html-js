@@ -41,6 +41,11 @@ const clearMem = () => {
   calc.operator = null;
 };
 
+const fixToScreenSize = (number) => {
+  const beforeDecimalPoint = Math.floor(number).toString().length;
+  return parseFloat(number.toFixed(7 - beforeDecimalPoint));
+};
+
 const updateScreen = (value) => {
   let valNumber = null;
   if (typeof value === 'number') {
@@ -50,7 +55,7 @@ const updateScreen = (value) => {
   }
 
   if (maxNumValidator(valNumber)) {
-    screen.innerText = parseFloat(valNumber);
+    screen.innerText = fixToScreenSize(valNumber);
   } else {
     screen.innerText = 'ERR';
     clearMem();
