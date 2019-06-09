@@ -1,201 +1,217 @@
-// Numbers
-const numberBtns = document.getElementsByClassName('number');
+const DISPLAY_MAX_NUM = 9999999999;
+const DISPLAY_MAX_NUM_LENGTH = DISPLAY_MAX_NUM.toString().length - 1;
 
-// Operators
-const plusBtn = document.getElementById('plus');
-const minusBtn = document.getElementById('minus');
-const multiplyBtn = document.getElementById('multiply');
-const divideBtn = document.getElementById('divide');
-
-// Equal
-const equalBtn = document.getElementById('equal');
-
-// Clear
-const allClearBtn = document.getElementById('allClear');
-const clearBtn = document.getElementById('clear');
-
-// Misc buttons
-const plusMinusBtn = document.getElementById('plusminus');
-const decimalBtn = document.getElementById('decimal');
-
-// Screen
-const screen = document.getElementById('screen');
-screen.innerText = '0';
-
-const calc = {
-  memory: null,
+const calculator = {
+  displayValue: '0',
+  firstNumber: null,
+  waitingForSecondNumber: false,
   operator: null,
-  clearScreen: false,
 };
 
-// Helpers
-const maxNumValidator = (num) => {
-  if (num > 99999999 || num < -99999999) {
-    return false;
-  }
-  return true;
-};
-
-const clearMem = () => {
-  calc.memory = null;
-  calc.operator = null;
-};
-
-const fixToScreenSize = (number) => {
-  const beforeDecimalPoint = Math.floor(number).toString().length;
-  return parseFloat(number.toFixed(7 - beforeDecimalPoint));
-};
-
-const updateScreen = (value) => {
-  let valNumber = null;
-  if (typeof value === 'number') {
-    valNumber = value;
-  } else if (typeof value === 'string') {
-    valNumber = parseFloat(value);
-  }
-
-  if (maxNumValidator(valNumber)) {
-    screen.innerText = fixToScreenSize(valNumber);
-  } else {
-    screen.innerText = 'ERR';
-    clearMem();
-  }
-};
-
-const updateMemory = (value) => {
-  let valNumber = null;
-  if (typeof value === 'number') {
-    valNumber = value;
-  } else if (typeof value === 'string') {
-    valNumber = parseFloat(value);
-  }
-
-  if (maxNumValidator(valNumber)) {
-    calc.memory = valNumber;
-  } else {
-    screen.innerText = 'ERR';
-    clearMem();
-  }
-};
-
-const calculate = (event) => {
-  const operator = event.target.innerText;
-  calc.operator = operator;
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.memory === null) {
-    updateMemory(screenNum);
-  } else {
-    let sum;
-    switch (operator) {
-      case '+':
-        sum = calc.memory + screenNum;
-        break;
-      case '-':
-        sum = calc.memory - screenNum;
-        break;
-      case '\xF7':
-        sum = calc.memory / screenNum;
-        break;
-      case '\xD7':
-        sum = calc.memory * screenNum;
-        break;
-      default:
-        throw new Error('Error in calculate function!');
-    }
-
-    updateMemory(sum);
-    updateScreen(sum);
-  }
-  calc.clearScreen = true;
-};
-
-// EventListeners
-const allClearListener = () => {
-  screen.innerText = '0';
-  calc.memory = null;
-  calc.operator = null;
-};
-
-const clearListener = () => {
-  screen.innerText = calc.memory;
-  calc.memory = null;
-  calc.operator = null;
-};
-
-const numberListener = (event) => {
-  if (calc.clearScreen) {
-    screen.innerText = '';
-    calc.clearScreen = false;
-  }
-
-  if (screen.innerText === '0') {
-    screen.innerText = '';
-  }
-
-  if (screen.innerText.length <= 7) {
-    screen.innerText += event.target.innerText;
-  }
-};
-
-const equalListener = () => {
-  const screenNum = parseFloat(screen.innerText);
-
-  if (calc.operator === '+') {
-    updateScreen(calc.memory + screenNum);
-    calc.clearScreen = true;
-    clearMem();
-  }
-
-  if (calc.operator === '-') {
-    updateScreen(calc.memory - screenNum);
-    calc.clearScreen = true;
-    clearMem();
-  }
-
-  if (calc.operator === '\xD7') {
-    updateScreen(calc.memory * screenNum);
-    calc.clearScreen = true;
-    clearMem();
-  }
-
-  if (calc.operator === '\xF7') {
-    updateScreen(calc.memory / screenNum);
-    calc.clearScreen = true;
-    clearMem();
-  }
-};
-
-const decimalBtnListener = () => {
-  if (calc.clearScreen) {
-    screen.innerText = '0';
-    calc.clearScreen = false;
-  }
-
-  if (screen.innerText.length <= 7) {
-    screen.innerText += '.';
-  }
-};
-
-const plusMinusListener = () => {
-  const screenString = screen.innerText;
-  if (screenString[0] === '-' && screenString !== '0') {
-    screen.innerText = screenString.slice(1);
-  } else if (screenString !== '0') {
-    screen.innerText = `-${screenString}`;
-  }
-};
-
-// Add EventListeners
-for (let i = 0; i < numberBtns.length; i += 1) {
-  numberBtns[i].addEventListener('click', numberListener);
+function clearSideDisplay() {
+  const sideDisplay = document.querySelector('.displaySide');
+  sideDisplay.value = '';
 }
-plusBtn.addEventListener('click', calculate);
-minusBtn.addEventListener('click', calculate);
-multiplyBtn.addEventListener('click', calculate);
-divideBtn.addEventListener('click', calculate);
-equalBtn.addEventListener('click', equalListener);
-plusMinusBtn.addEventListener('click', plusMinusListener);
-clearBtn.addEventListener('click', clearListener);
-allClearBtn.addEventListener('click', allClearListener);
-decimalBtn.addEventListener('click', decimalBtnListener);
+
+function resetCalculator() {
+  calculator.displayValue = '0';
+  calculator.firstNumber = null;
+  calculator.waitingForSecondNumber = false;
+  calculator.operator = null;
+  clearSideDisplay();
+}
+
+function resetDisplay() {
+  if (calculator.operator !== '=') {
+    calculator.displayValue = '0';
+    calculator.operator = null;
+    clearSideDisplay();
+  }
+}
+
+function resetMemory() {
+  calculator.displayValue = '0';
+  calculator.firstNumber = null;
+  calculator.waitingForSecondNumber = false;
+  calculator.operator = null;
+}
+
+function validateNumberSize(num) {
+  if (num < DISPLAY_MAX_NUM && num > -DISPLAY_MAX_NUM) {
+    return true;
+  }
+
+  return false;
+}
+
+function validateNumberLength(num) {
+  if (num.length <= DISPLAY_MAX_NUM_LENGTH) {
+    return true;
+  }
+
+  return false;
+}
+
+function fixNumberLength(num) {
+  const digitsBeforeDecimal = parseInt(num, 10).toString().length;
+  const roomLeftForDigits = DISPLAY_MAX_NUM_LENGTH - digitsBeforeDecimal - 1;
+
+  const newNum = +parseFloat(num).toFixed(roomLeftForDigits);
+
+  return newNum;
+}
+
+function updateSideDisplay() {
+  const sideDisplay = document.querySelector('.displaySide');
+
+  if (calculator.operator === '/') {
+    sideDisplay.value = '÷';
+  } else if (calculator.operator === '*') {
+    sideDisplay.value = '×';
+  } else if (calculator.operator === '+') {
+    sideDisplay.value = '+';
+  } else if (calculator.operator === '-') {
+    sideDisplay.value = '-';
+  } else if (calculator.operator === '=') {
+    sideDisplay.value = '=';
+  } else {
+    sideDisplay.value = ' ';
+  }
+}
+
+function updateMainDisplay() {
+  const display = document.querySelector('.displayMain');
+  const { displayValue } = calculator;
+
+  if (validateNumberSize(displayValue)) {
+    if (validateNumberLength(displayValue)) {
+      display.value = displayValue;
+    } else {
+      display.value = fixNumberLength(displayValue);
+    }
+  } else {
+    display.value = 'ERROR';
+    resetMemory();
+  }
+}
+
+function inputDigit(digit) {
+  const { displayValue, waitingForSecondNumber: waitingForSecondOperand } = calculator;
+
+  if (waitingForSecondOperand) {
+    calculator.displayValue = digit;
+    calculator.waitingForSecondNumber = false;
+  } else if (displayValue.length < DISPLAY_MAX_NUM_LENGTH) {
+    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+  }
+
+  clearSideDisplay();
+}
+
+function inputDecimal(dot) {
+  const { waitingForSecondNumber } = calculator;
+  let { displayValue } = calculator;
+
+  if (waitingForSecondNumber === true) return;
+
+  if (!displayValue.includes(dot) && displayValue.length < DISPLAY_MAX_NUM_LENGTH) {
+    displayValue += dot;
+  }
+}
+
+function calculate(firstNumber, secondNumber, operator) {
+  switch (operator) {
+    case '/':
+      return firstNumber / secondNumber;
+    case '*':
+      return firstNumber * secondNumber;
+    case '+':
+      return firstNumber + secondNumber;
+    case '-':
+      return firstNumber - secondNumber;
+    case '=':
+      return secondNumber;
+    default:
+      return false;
+  }
+}
+
+function handleOperator(nextOperator) {
+  const { firstNumber, displayValue, operator } = calculator;
+  const inputValue = parseFloat(displayValue);
+
+  if (nextOperator === 'root') {
+    const result = Math.sqrt(inputValue).toString();
+    calculator.displayValue = result;
+    calculator.operator = null;
+    calculator.firstNumber = result;
+    calculator.waitingForSecondNumber = false;
+    return;
+  }
+
+
+  if (operator && calculator.waitingForSecondNumber) {
+    calculator.operator = nextOperator;
+    return;
+  }
+
+  if (firstNumber === null) {
+    calculator.firstNumber = inputValue;
+  } else if (operator) {
+    const result = calculate(firstNumber, inputValue, operator);
+
+    calculator.displayValue = String(result);
+    calculator.firstNumber = result;
+  }
+
+  calculator.waitingForSecondNumber = true;
+  calculator.operator = nextOperator;
+}
+
+updateMainDisplay();
+
+const keys = document.querySelector('.keys');
+keys.addEventListener('click', (event) => {
+  const { target } = event;
+  if (!target.matches('button')) {
+    return;
+  }
+
+  if (target.classList.contains('operator')) {
+    handleOperator(target.value);
+    updateMainDisplay();
+    updateSideDisplay();
+    return;
+  }
+
+  if (target.classList.contains('decimal')) {
+    inputDecimal(target.value);
+    updateMainDisplay();
+    return;
+  }
+
+  if (target.classList.contains('allClear')) {
+    resetCalculator();
+    updateMainDisplay();
+    return;
+  }
+
+  if (target.classList.contains('clear')) {
+    resetDisplay();
+    updateMainDisplay();
+    return;
+  }
+
+  if (target.classList.contains('plusMinus')) {
+    if (calculator.displayValue[0] === '-' && calculator.displayValue !== '0') {
+      calculator.displayValue = calculator.displayValue.slice(1);
+    } else if (calculator.displayValue !== '0') {
+      calculator.displayValue = `-${calculator.displayValue}`;
+    }
+    updateMainDisplay();
+    return;
+  }
+
+  inputDigit(target.value);
+  updateMainDisplay();
+});

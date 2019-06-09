@@ -1,32 +1,13 @@
-/* Reset buttons */
-
-button {
-  padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  /* show a hand cursor on hover; some argue that we
-  should keep the default arrow cursor for buttons */
-  cursor: pointer;
-}
-
-/* +++++++++++++++++++++++++++++++++++++++ */
-
 :root {
   --bg-color: #eeeeee;
   --screen-color: #dddddd;
   --border-color: #000000;
-  --btn-color:  #686b6e;
+  --btn-color:  #828588;
+  --btn-hover-color: #686b6e;
   --btn-alt-color: #d62d0f;
-  --btn-hover-color: #262729;
+  --btn-alt-hover-color: #e93010;
   --font-color: #000000;
   --font-alt-color: #ffffff;
-}
-
-html {
-  margin: 0;
-  padding: 0;
 }
 
 html, body {
@@ -34,8 +15,18 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
   background-color: var(--bg-color);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+p {
+  font-size: 1.8rem;
 }
 
 body {
@@ -45,100 +36,100 @@ body {
   align-items: center;
 }
 
-.grid-container {
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.calculator {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin: auto;
+  width: 400px;
+}
+
+.display {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "screen screen screen screen" "allClear clear plusminus divide" "seven eight nine multiply" "four five six minus" "one two three plus" "zero decimal equal plus";
-  width: 300px;
-  height: 300px;
-  margin: 5% auto auto auto;
-  border: 1px solid var(--border-color);
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.screen { 
-  grid-area: screen; 
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  border: 1px solid var(--border-color);
-  color: var(--font-color);
-  font-size: 3rem;
-  padding: 0 1rem 0 1rem;
+.displaySide {
+  width: 100%;
+  font-size: 5rem;
+  height: 80px;
+  border: none;
   background-color: var(--screen-color);
+  color: var(--font-color);
+  text-align: center;
+  
 }
 
-.seven { grid-area: seven; }
-
-.eight { grid-area: eight; }
-
-.nine { grid-area: nine; }
-
-.four { grid-area: four; }
-
-.five { grid-area: five; }
-
-.six { grid-area: six; }
-
-.one { grid-area: one; }
-
-.two { grid-area: two; }
-
-.three { grid-area: three; }
-
-.zero { grid-area: zero; }
-
-.decimal { grid-area: decimal; }
-
-.plusminus { grid-area: plusminus; }
-
-.clear { grid-area: clear; }
-
-.allClear { grid-area: allClear; }
-
-.plus { grid-area: plus; }
-
-.minus { grid-area: minus; }
-
-.multiply { grid-area: multiply; }
-
-.divide { grid-area: divide; }
-
-.equal { grid-area: equal; }
+.displayMain {
+  width: 100%;
+  font-size: 5rem;
+  height: 80px;
+  border: none;
+  background-color: var(--screen-color);
+  color: var(--font-color);
+  text-align: right;
+  padding-right: 10px;
+  padding-left: 10px;
+}
 
 button {
+  height: 60px;
   background-color: var(--btn-color);
-  color: var(--font-color);
-  font-size: 2rem;
-  width: 100%;
-  height: 100%;
+  border-radius: 3px;
   border: 1px solid var(--border-color);
+  font-size: 2rem;
+  color: var(--font-color);
 }
 
-.operator {
+button:active {
+  background-color: var(--btn-hover-color);
+}
+
+.allClear {
   background-color: var(--btn-alt-color);
   color: var(--font-alt-color);
 }
 
-button:hover {
-  background-color: var(--btn-hover-color);
+.allClear:active {
+  background-color: var(--btn-alt-hover-color);
   color: var(--font-alt-color);
+}
+
+.clear {
+  background-color: var(--btn-alt-color);
+  color: var(--font-alt-color);
+}
+
+.clear:active {
+  background-color: var(--btn-alt-hover-color);
+  color: var(--font-alt-color);
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
 }
 
 header {
   width: 100%;
   text-align: center;
-}
-
-main {
-  height: 100%;
-  width: 100%;
+  margin: 1rem;
 }
 
 footer {
   width: 100%;
   text-align: center;
   font-size: 1rem;
+  margin: 1rem;
 }
 
 footer p {
