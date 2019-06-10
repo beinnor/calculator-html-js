@@ -17,7 +17,7 @@ html, body {
   height: 100%;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  font-size: 62.5%;
+  font-size: 50%;
   background-color: var(--bg-color);
 }
 
@@ -26,7 +26,7 @@ h1 {
 }
 
 p {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 body {
@@ -46,7 +46,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 5px;
   margin: auto;
-  width: 400px;
+  width: 99%;
 }
 
 .display {
@@ -54,12 +54,12 @@ body {
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 1fr;
   border-bottom: 1px solid var(--border-color);
+  height: 10rem;
 }
 
 .displaySide {
   width: 100%;
-  font-size: 5rem;
-  height: 80px;
+  font-size: 6rem;
   border: none;
   background-color: var(--screen-color);
   color: var(--font-color);
@@ -69,8 +69,7 @@ body {
 
 .displayMain {
   width: 100%;
-  font-size: 5rem;
-  height: 80px;
+  font-size: 6rem;
   border: none;
   background-color: var(--screen-color);
   color: var(--font-color);
@@ -80,11 +79,10 @@ body {
 }
 
 button {
-  height: 60px;
   background-color: var(--btn-color);
   border-radius: 3px;
   border: 1px solid var(--border-color);
-  font-size: 2rem;
+  font-size: 7rem;
   color: var(--font-color);
 }
 
@@ -115,8 +113,8 @@ button:active {
 .keys {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  padding: 20px;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
 }
 
 header {
@@ -128,16 +126,69 @@ header {
 footer {
   width: 100%;
   text-align: center;
-  font-size: 1rem;
   margin: 1rem;
 }
 
 footer p {
-  padding: 5px;
+  font-size: 3rem;
 }
-
 
 a {
   color: var(--font-color);
   text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) {
+
+  html, body {
+    font-size: 62.5%;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+  
+  p {
+    font-size: 1.8rem;
+  }
+
+  .calculator {
+    width: 400px;
+  }
+
+  .display {
+    height: initial;
+  }
+
+  .displaySide {
+    font-size: 5rem;
+    height: 80px;
+  }
+  
+  .displayMain {
+    font-size: 5rem;
+    height: 80px;
+  }
+  
+  button {
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .keys {
+    grid-gap: 20px;
+    padding: 20px;
+  }
+
+  footer {
+    font-size: 1rem;
+  }
+
+  footer p {
+    padding: 5px;
+    font-size: initial;
+  }
+
+
+ 
 }
