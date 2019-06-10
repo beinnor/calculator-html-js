@@ -110,12 +110,12 @@ function inputDigit(digit) {
 
 function inputDecimal(dot) {
   const { waitingForSecondNumber } = calculator;
-  let { displayValue } = calculator;
+  const { displayValue } = calculator;
 
   if (waitingForSecondNumber === true) return;
 
   if (!displayValue.includes(dot) && displayValue.length < DISPLAY_MAX_NUM_LENGTH) {
-    displayValue += dot;
+    calculator.displayValue += dot;
   }
 }
 
